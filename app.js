@@ -160,6 +160,20 @@ setInterval(()=>{
 setInterval(()=>{earn+=Math.floor(120+Math.random()*480);const e=$('#earnNum');if(e)e.textContent=peso(earn)},2800);
 $('#cartBtn').onclick=()=>toast(cart?`You have <b>${cart}</b> active bid${cart>1?'s':''} — checkout unlocks on launch 💚`:'Tap <b>Bid now</b> on any drop to feel it ⚡');
 
+/* ---------- seller payout calculator ---------- */
+(function(){
+  const items=$('#items'), price=$('#price'), out=$('#calcOut');
+  if(!items||!price||!out) return;
+  function paint(r){const p=(r.value-r.min)/(r.max-r.min)*100;r.style.setProperty('--fill',p+'%')}
+  function update(){
+    const n=+items.value, p=+price.value;
+    $('#itemsVal').textContent=n; $('#priceVal').textContent=peso(p);
+    out.textContent=peso(n*p)+'/mo';
+    [items,price].forEach(paint);
+  }
+  items.addEventListener('input',update); price.addEventListener('input',update); update();
+})();
+
 /* ---------- magnetic buttons ---------- */
 $$('.magnetic').forEach(b=>{
   b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.18}px)`});

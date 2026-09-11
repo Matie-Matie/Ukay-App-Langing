@@ -151,16 +151,29 @@
   <!-- ============ SELL ============ -->
   <section id="sell" class="section sell">
     <div class="sell-card reveal">
-      <div class="sell-copy">
-        <p class="kicker light">For sellers</p>
-        <h2>Your closet is<br /><em>cash on a hanger.</em></h2>
-        <p>List in 60 seconds. Go live with your phone. UKAY handles payments, hagglers, and shipping labels — you just show the fits.</p>
-        <ul class="ticks"><li><b>0% fee</b> for your first 5 sold pieces</li><li><b>Live toolkit</b> — countdowns, pinned bids, hype chat</li><li><b>Payouts in 24h</b> via GCash / bank</li></ul>
-        <div class="hero-actions"><a href="#get" class="btn btn-light magnetic">Start selling →</a><a href="#how" class="btn btn-ghost magnetic">See seller guide</a></div>
+      <div class="sell-top">
+        <div><p class="kicker light">For sellers</p>
+        <h2>Your closet is<br /><em>cash on a hanger.</em></h2></div>
+        <p class="sell-sub">List in 60 seconds. Go live with just your phone — UKAY handles payments, hagglers, and shipping labels. Drag the sliders, see your money.</p>
       </div>
-      <div class="sell-visual" data-speed="6">
-        <img src="https://images.unsplash.com/photo-1489987707025-afc232f7bdaf?w=800&q=80&auto=format&fit=crop" alt="Seller closet" loading="lazy" />
-        <div class="earn"><small>this week</small><b id="earnNum">₱0</b><small>@thriftwithbea · 23 sold</small></div>
+      <div class="sell-steps">
+        <div><span>01</span><b>Snap & list</b><small>60 seconds · smart price hints</small></div>
+        <div><span>02</span><b>Go live Friday</b><small>model fits · pin bids · hype chat</small></div>
+        <div><span>03</span><b>Paid in 24h</b><small>GCash / bank · 0% fee × first 5</small></div>
+      </div>
+      <div class="sell-bottom">
+        <div class="calc">
+          <div class="calc-head"><b>Estimate your payout</b><span id="calcOut">₱6,400/mo</span></div>
+          <label class="slider">Pieces you could sell / month <b id="itemsVal">16</b><input id="items" type="range" min="4" max="60" value="16" /></label>
+          <label class="slider">Average price each <b id="priceVal">₱400</b><input id="price" type="range" min="150" max="2000" step="50" value="400" /></label>
+          <a href="#get" class="btn btn-light magnetic">Start selling →</a>
+          <small>6% fee only after your first 5 free sales</small>
+        </div>
+        <div class="sell-visual" data-speed="6">
+          <img src="https://images.unsplash.com/photo-1489987707025-afc232f7bdaf?w=800&q=80&auto=format&fit=crop" alt="Seller closet" loading="lazy" />
+          <span class="live-chip"><i></i>@thriftwithbea is LIVE</span>
+          <div class="earn"><small>paid out this week</small><b id="earnNum">₱0</b><small>23 sold · 4.9 ★ seller</small></div>
+        </div>
       </div>
     </div>
   </section>
@@ -206,6 +219,7 @@
   </section>
 
   <section class="final reveal">
+    <p class="pill live-dot"><i></i> 688 vouchers left — then the price goes up</p>
     <h2>Someone else is eyeing<br /><em>your size.</em></h2>
     <a href="#get" class="btn btn-dark btn-lg magnetic">Get early access — ₱200 off →</a>
     <small>1 hr 30 min exam build · designed with ♥ in Manila</small>

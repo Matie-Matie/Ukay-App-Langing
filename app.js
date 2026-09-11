@@ -93,7 +93,10 @@ if(typeof gsap!=='undefined'){
       scrollTrigger:{trigger:el,start:'top 88%'}});
   });
   gsap.to('.hero-copy h1',{yPercent:-8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
-  gsap.to('.phone-tilt',{y:-70,rotate:2,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1.2}});
+  gsap.to('.hero-stage',{y:-60,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1.2}}); // parent lifts; tilt owns .phone-tilt — no transform fight, no snap
+  const refresh=()=>ScrollTrigger.refresh();
+  addEventListener('load',refresh); // late images shift layout — recalc triggers so nothing jumps
+  $$('img').forEach(i=>{if(!i.complete)i.addEventListener('load',refresh)});
 } else fallbackReveal();
 
 /* counters */

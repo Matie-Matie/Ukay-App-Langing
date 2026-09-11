@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UKAY — Good clothes live twice | Bid, Go Live, Thrift</title>
+<meta name="description" content="UKAY is the secondhand marketplace where pre-loved finds are won through bidding and live auctions. Get early access + ₱200 voucher." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css" />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='28' fill='%23131311'/><text x='50' y='68' font-size='52' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='800'>U</text></svg>" />
+</head>
+<body>
+<div id="progress"></div>
+<div id="cursor" aria-hidden="true"></div>
+
+<!-- ambient grain + glow -->
+<div class="ambient" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span><span class="grain"></span></div>
+
+<header id="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top" aria-label="UKAY home"><span class="brand-mark">U</span><span class="brand-word">UKAY</span><span class="brand-tag">beta</span></a>
+    <nav class="links">
+      <a href="#drops">Live drops</a>
+      <a href="#how">How it works</a>
+      <a href="#sell">Sell</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <button id="cartBtn" class="cart" aria-label="Your bids">♥ <b id="cartCount">0</b></button>
+      <a href="#get" class="btn btn-dark magnetic">Get early access</a>
+      <button id="menuBtn" aria-label="Menu">☰</button>
+    </div>
+  </div>
+  <div id="mobileMenu"><a href="#drops">Live drops</a><a href="#how">How it works</a><a href="#sell">Sell</a><a href="#reviews">Reviews</a><a href="#get">Get early access</a></div>
+</header>
+
+<main id="top">
+  <!-- ============ HERO : living closet ============ -->
+  <section class="hero">
+    <canvas id="webgl" aria-hidden="true"></canvas>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <div class="pill-row reveal">
+          <span class="pill live-dot"><i></i> 2,418 people bidding right now</span>
+          <span class="pill ghost">Launching soon · PH</span>
+        </div>
+        <h1 class="reveal">Good clothes<br /><em>live twice.</em></h1>
+        <p class="lede reveal">UKAY is the secondhand marketplace where pre-loved gems are won — not just bought. Bid in seconds. Steal the show in <b>live auctions</b> every Friday.</p>
+        <div class="hero-actions reveal">
+          <a href="#get" class="btn btn-dark btn-lg magnetic">Claim ₱200 voucher →</a>
+          <a href="#drops" class="btn btn-light btn-lg magnetic"><span class="play">▶</span> Watch live drops</a>
+        </div>
+        <div class="proof reveal">
+          <div class="avatars"><img src="https://i.pravatar.cc/64?img=32" alt="" /><img src="https://i.pravatar.cc/64?img=47" alt="" /><img src="https://i.pravatar.cc/64?img=12" alt="" /><img src="https://i.pravatar.cc/64?img=5" alt="" /><span>+12k</span></div>
+          <div><b>4.9 ★ early-access rating</b><small>from 3,100+ thrifters on the waitlist</small></div>
+        </div>
+        <div class="hero-meta reveal"><span>✓ No meet-up scams — in-app checkout</span><span>✓ Authenticated sellers</span></div>
+      </div>
+
+      <div class="hero-stage reveal">
+        <div class="phone-tilt" id="phoneTilt">
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="app-top"><b>ukay</b><span class="live-badge"><i></i>LIVE · 1.2k</span></div>
+            <div class="app-hero-img"><img src="https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=700&q=80&auto=format&fit=crop" alt="Vintage denim jacket" /><span class="app-price" id="phonePrice">₱1,240</span></div>
+            <div class="app-title">Vintage Levi's Trucker ’94 <small>9.2/10 · Size M</small></div>
+            <div class="bid-row"><div class="bid-avatars"><img src="https://i.pravatar.cc/40?img=8" alt="" /><img src="https://i.pravatar.cc/40?img=15" alt="" /><img src="https://i.pravatar.cc/40?img=22" alt="" /></div><small id="phoneBids">38 bids · ends in <b id="phoneTimer">04:12</b></small></div>
+            <div class="app-bidbar"><button class="btn btn-dark btn-block" data-bid="phone">Place bid · ₱1,280</button><button class="icon-btn" aria-label="Like">♥</button></div>
+            <div class="app-feed" id="phoneFeed"><span><b>@mika</b> bid ₱1,240</span><span><b>@joen</b> bid ₱1,180</span></div>
+          </div>
+          <!-- orbiting bid cards : different parallax depths -->
+          <div class="orbit o1" data-depth="26"><b>🔥 Sold ₱3,400</b><small>Carhartt Detroit · 14 bids</small></div>
+          <div class="orbit o2" data-depth="48"><b>⚡ +₱120</b><small>@ram just outbid you</small></div>
+          <div class="orbit o3" data-depth="18"><b>● LIVE Friday 8PM</b><small>200+ pieces drop</small></div>
+        </div>
+        <div class="stage-shadow"></div>
+      </div>
+    </div>
+    <div class="scroll-hint"><span></span>scroll — the closet moves with you</div>
+  </section>
+
+  <!-- ============ TICKER ============ -->
+  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack">
+    <span>LIVE NOW · Vintage Levi's ₱1,240</span><i>✦</i><span>Carhartt Detroit sold ₱3,400</span><i>✦</i><span>Friday 8PM · 200+ pieces</span><i>✦</i><span>AF1 '07 · ₱2,050 · 22 bids</span><i>✦</i><span>Silk slip dress · ₱680</span><i>✦</i><span>Film camera · ₱4,900</span><i>✦</i>
+    <span>LIVE NOW · Vintage Levi's ₱1,240</span><i>✦</i><span>Carhartt Detroit sold ₱3,400</span><i>✦</i><span>Friday 8PM · 200+ pieces</span><i>✦</i><span>AF1 '07 · ₱2,050 · 22 bids</span><i>✦</i><span>Silk slip dress · ₱680</span><i>✦</i><span>Film camera · ₱4,900</span><i>✦</i>
+  </div></div>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="stat reveal"><b><span class="count" data-to="48000">0</span>+</b><small>pre-loved pieces waiting</small></div>
+    <div class="stat reveal"><b><span class="count" data-to="92">0</span>%</b><small>sold below retail</small></div>
+    <div class="stat reveal"><b><span class="count" data-to="3100">0</span>+</b><small>thrifters on waitlist</small></div>
+    <div class="stat reveal"><b>₱<span class="count" data-to="200">0</span></b><small>welcome voucher for you</small></div>
+  </section>
+
+  <!-- ============ LIVE DROPS : the page breathes ============ -->
+  <section id="drops" class="section">
+    <div class="sec-head">
+      <div><p class="kicker reveal">● Live right now — simulated demo</p>
+      <h2 class="reveal">Tonight's drops are <em>moving.</em></h2></div>
+      <p class="sec-sub reveal">Prices tick up in real time. Hit <b>Bid</b> — feel what winning a thrift steal is like. Next mega-live in <b id="megaTimer">02:14:55</b>.</p>
+    </div>
+    <div class="drops-grid">
+      <article class="drop reveal" data-price="1240" data-name="Vintage Levi's Trucker '94">
+        <div class="drop-img"><img src="https://images.unsplash.com/photo-1551537482-f2075a1d41f2?w=800&q=80&auto=format&fit=crop" alt="Denim jacket" loading="lazy" /><span class="badge live"><i></i>LIVE</span><span class="ends">ends <b class="t" data-t="252">04:12</b></span></div>
+        <div class="drop-body"><h3>Vintage Levi's Trucker '94</h3><small>9.2/10 · Size M · Quezon City</small>
+        <div class="price-row"><b class="price">₱1,240</b><small class="bids">38 bids</small></div>
+        <button class="btn btn-dark btn-block" data-bid>Bid now</button></div>
+      </article>
+      <article class="drop reveal" data-price="2050" data-name="Nike AF1 '07 Triple White">
+        <div class="drop-img"><img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&q=80&auto=format&fit=crop" alt="Sneakers" loading="lazy" /><span class="badge live"><i></i>LIVE</span><span class="ends">ends <b class="t" data-t="481">08:01</b></span></div>
+        <div class="drop-body"><h3>Nike AF1 '07 Triple White</h3><small>8.8/10 · Size 9 · Makati</small>
+        <div class="price-row"><b class="price">₱2,050</b><small class="bids">22 bids</small></div>
+        <button class="btn btn-dark btn-block" data-bid>Bid now</button></div>
+      </article>
+      <article class="drop reveal" data-price="680" data-name="Silk Slip Dress — Champagne">
+        <div class="drop-img"><img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&q=80&auto=format&fit=crop" alt="Vintage tee" loading="lazy" /><span class="badge hot">🔥 9 watching</span><span class="ends">ends <b class="t" data-t="143">02:23</b></span></div>
+        <div class="drop-body"><h3>Silk Slip Dress — Champagne</h3><small>9.5/10 · Size S · Cebu</small>
+        <div class="price-row"><b class="price">₱680</b><small class="bids">51 bids</small></div>
+        <button class="btn btn-dark btn-block" data-bid>Bid now</button></div>
+      </article>
+      <article class="drop reveal" data-price="4900" data-name="Canon AE-1 Film Camera">
+        <div class="drop-img"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=800&q=80&auto=format&fit=crop" alt="Film camera" loading="lazy" /><span class="badge hot">⚡ rare</span><span class="ends">ends <b class="t" data-t="920">15:20</b></span></div>
+        <div class="drop-body"><h3>Canon AE-1 Film Camera</h3><small>Tested · 50mm 1.8 · Manila</small>
+        <div class="price-row"><b class="price">₱4,900</b><small class="bids">17 bids</small></div>
+        <button class="btn btn-dark btn-block" data-bid>Bid now</button></div>
+      </article>
+    </div>
+    <p class="hint">↑ try it — every bid flies to your ♥ up top and the whole page reacts.</p>
+  </section>
+
+  <!-- ============ PARALLEL WORDS : parallax band ============ -->
+  <section class="band" aria-hidden="true">
+    <div class="band-row r1" data-speed="-14"><span>bid live — thrift better — bid live — thrift better — </span><span>bid live — thrift better — bid live — thrift better — </span></div>
+    <div class="band-row r2" data-speed="12"><span>pre-loved ✦ authenticated ✦ live auctions ✦ pre-loved ✦ authenticated ✦ live auctions ✦ </span><span>pre-loved ✦ authenticated ✦ live auctions ✦ pre-loved ✦ authenticated ✦ live auctions ✦ </span></div>
+  </section>
+
+  <!-- ============ HOW ============ -->
+  <section id="how" class="section">
+    <p class="kicker reveal">How UKAY works</p>
+    <h2 class="reveal">Three taps to your next <em>steal.</em></h2>
+    <div class="how-grid">
+      <div class="how reveal" data-speed="-4"><span class="num">01</span><h3>Discover drops</h3><p>Scroll curated thrift — vintage, streetwear, designer, oddities. Every piece condition-graded with real photos.</p><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=700&q=80&auto=format&fit=crop" alt="Thrift rack" loading="lazy" /></div>
+      <div class="how reveal" data-speed="4"><span class="num">02</span><h3>Bid or go live</h3><p>Outbid the room in seconds, or join Friday live auctions — sellers model fits, answer questions, drop prices on the spot.</p><img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=700&q=80&auto=format&fit=crop" alt="Watch auction" loading="lazy" /></div>
+      <div class="how reveal" data-speed="-4"><span class="num">03</span><h3>Win + wear</h3><p>In-app checkout, protected shipping nationwide. If it's not as described — instant refund. Wear the story.</p><img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700&q=80&auto=format&fit=crop" alt="Handbag" loading="lazy" /></div>
+    </div>
+  </section>
+
+  <!-- ============ SELL ============ -->
+  <section id="sell" class="section sell">
+    <div class="sell-card reveal">
+      <div class="sell-copy">
+        <p class="kicker light">For sellers</p>
+        <h2>Your closet is<br /><em>cash on a hanger.</em></h2>
+        <p>List in 60 seconds. Go live with your phone. UKAY handles payments, hagglers, and shipping labels — you just show the fits.</p>
+        <ul class="ticks"><li><b>0% fee</b> for your first 5 sold pieces</li><li><b>Live toolkit</b> — countdowns, pinned bids, hype chat</li><li><b>Payouts in 24h</b> via GCash / bank</li></ul>
+        <div class="hero-actions"><a href="#get" class="btn btn-light magnetic">Start selling →</a><a href="#how" class="btn btn-ghost magnetic">See seller guide</a></div>
+      </div>
+      <div class="sell-visual" data-speed="6">
+        <img src="https://images.unsplash.com/photo-1489987707025-afc232f7bdaf?w=800&q=80&auto=format&fit=crop" alt="Seller closet" loading="lazy" />
+        <div class="earn"><small>this week</small><b id="earnNum">₱0</b><small>@thriftwithbea · 23 sold</small></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section id="reviews" class="section">
+    <p class="kicker reveal">Loved by early thrifters</p>
+    <h2 class="reveal">Word on the <em>group chat.</em></h2>
+    <div class="rev-grid">
+      <figure class="rev reveal"><blockquote>“Won a Carhartt for ₱1,100 while eating dinner. The live auction is dangerously fun.”</blockquote><figcaption><img src="https://i.pravatar.cc/64?img=47" alt="" /><span><b>Mika R.</b><small>QC · 14 wins</small></span><span class="stars">★★★★★</span></figcaption></figure>
+      <figure class="rev reveal"><blockquote>“Sold 30 pieces from my closet in one Friday live. Paid my rent with old clothes??”</blockquote><figcaption><img src="https://i.pravatar.cc/64?img=32" alt="" /><span><b>Bea L.</b><small>Cebu · seller</small></span><span class="stars">★★★★★</span></figcaption></figure>
+      <figure class="rev reveal"><blockquote>“Condition grades are honest. What arrived looked better than the photos.”</blockquote><figcaption><img src="https://i.pravatar.cc/64?img=12" alt="" /><span><b>Joen P.</b><small>Makati · 9 wins</small></span><span class="stars">★★★★★</span></figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ============ GET : conversion ============ -->
+  <section id="get" class="section get">
+    <div class="get-card reveal">
+      <div><p class="kicker light">● Early access · limited to 5,000</p>
+      <h2>Claim your <em>₱200</em> voucher.</h2>
+      <p>Drop your email. We'll text you your download link + voucher on launch day. No spam — just steals.</p>
+      <form id="earlyForm" novalidate>
+        <input id="email" type="email" placeholder="you@email.com" required autocomplete="email" />
+        <button class="btn btn-light btn-lg" type="submit">Notify me →</button>
+      </form>
+      <p id="formMsg" role="status"></p>
+      <div class="get-meta"><span>✓ Free forever to browse</span><span>✓ Unsubscribe anytime</span></div></div>
+      <div class="get-side"><b>4,312 / 5,000</b><div class="bar"><span id="barFill"></span></div><small>claimed — 688 vouchers left. Friday live unlocks at 5,000.</small>
+      <div class="qr">UKAY<br /><small>scan on launch day</small></div></div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" class="section faq">
+    <p class="kicker reveal">Questions?</p>
+    <h2 class="reveal">Fine <em>print,</em> minus the boring.</h2>
+    <div class="faq-list">
+      <details class="reveal" open><summary>Is UKAY really secondhand only?</summary><p>Yes — every listing is pre-owned, vintage, or deadstock. No fast-fashion dropshipping. We verify sellers and remove fakes fast.</p></details>
+      <details class="reveal"><summary>How do bidding and live auctions work?</summary><p>Timed listings accept bids until the clock hits zero. Live auctions happen Fridays 8PM — sellers present pieces on video, you tap to bid, winners check out in-app.</p></details>
+      <details class="reveal"><summary>What if my item isn't as described?</summary><p>Every order is covered: photo evidence → instant refund or return label. Sellers with repeat offenses are banned.</p></details>
+      <details class="reveal"><summary>How much does it cost to sell?</summary><p>Listing is free. 6% fee only when you sell — and your first 5 sales are 0% fee during launch.</p></details>
+    </div>
+  </section>
+
+  <section class="final reveal">
+    <h2>Someone else is eyeing<br /><em>your size.</em></h2>
+    <a href="#get" class="btn btn-dark btn-lg magnetic">Get early access — ₱200 off →</a>
+    <small>1 hr 30 min exam build · designed with ♥ in Manila</small>
+  </section>
+</main>
+
+<footer>
+  <div class="foot"><a class="brand" href="#top"><span class="brand-mark">U</span><span class="brand-word">UKAY</span></a>
+  <p>Good clothes live twice. © 2026 UKAY. Exam demo — mock data, no real backend.</p>
+  <div class="foot-links"><a href="#drops">Drops</a><a href="#sell">Sell</a><a href="#get">Early access</a></div></div>
+</footer>
+
+<div id="toasts" aria-live="polite"></div>
+<div id="fly" aria-hidden="true"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>

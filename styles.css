@@ -5,6 +5,9 @@
   --shadow:0 24px 60px -24px rgba(20,19,16,.22);
 }
 *{box-sizing:border-box} html{scroll-behavior:smooth;overflow-x:clip}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Plus Jakarta Sans",system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
 h1,h2,h3{letter-spacing:-.04em;line-height:.95;margin:0}
 h1{font-size:clamp(3.2rem,8vw,6.8rem);font-weight:800}

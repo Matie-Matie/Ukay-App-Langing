@@ -37,6 +37,27 @@ $$('a,.btn,button').forEach(b=>{b.addEventListener('mouseenter',()=>{cur.style.w
 $('#menuBtn').onclick=()=>$('#mobileMenu').classList.toggle('open');
 $$('#mobileMenu a').forEach(a=>a.onclick=()=>$('#mobileMenu').classList.remove('open'));
 
+/* ---------- Lenis : heavy, weighted smooth scroll ---------- */
+(function(){
+  if(typeof Lenis==='undefined') return;
+  document.documentElement.style.scrollBehavior='auto';
+  const lenis=new Lenis({lerp:0.09,smoothWheel:true});
+  if(typeof gsap!=='undefined'&&typeof ScrollTrigger!=='undefined'){
+    lenis.on('scroll',ScrollTrigger.update);
+    gsap.ticker.add(t=>lenis.raf(t*1000));
+    gsap.ticker.lagSmoothing(0);
+  }else{
+    const raf=t=>{lenis.raf(t);requestAnimationFrame(raf)};
+    requestAnimationFrame(raf);
+  }
+  $$('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+    const id=a.getAttribute('href'); if(!id||id.length<2) return;
+    const t=document.querySelector(id); if(!t) return;
+    e.preventDefault(); lenis.scrollTo(t,{offset:-72,duration:1.5});
+  }));
+  window.__lenis=lenis;
+})();
+
 /* ---------- 3D hero : soft floating thrift orbs ---------- */
 (function(){
   const cv=$('#webgl'); if(!cv||typeof THREE==='undefined') return;

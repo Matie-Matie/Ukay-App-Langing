@@ -95,19 +95,19 @@ main,header,footer{position:relative;z-index:1}
 @keyframes wheel{50%{transform:translate(-50%,8px);opacity:0}}
 
 /* ticker */
-.ticker{background:var(--ink);color:#fff;overflow:hidden;padding:13px 0;transform:rotate(-1deg);margin:18px -10px}
+.ticker{background:var(--ink);color:#fff;overflow:hidden;padding:13px 0;transform:rotate(-1deg);margin:40px -10px}
 .ticker-track{display:flex;gap:26px;white-space:nowrap;font-weight:800;letter-spacing:.02em;animation:tick 26s linear infinite;width:max-content}
 .ticker-track i{color:var(--orange)}.ticker-track span{opacity:.95}
 @keyframes tick{to{transform:translateX(-50%)}}
 
 /* stats */
-.stats{width:min(1180px,100%);margin:26px auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 20px}
+.stats{width:min(1180px,100%);margin:44px auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:0 20px}
 .stat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;text-align:center}.stat b{font-size:1.9rem;letter-spacing:-.03em}.stat small{display:block;color:var(--muted);font-weight:600;margin-top:4px}
 
 /* sections */
-.section{width:min(1180px,100%);margin:0 auto;padding:72px 20px 10px}
+.section{width:min(1180px,100%);margin:0 auto;padding:120px 20px 34px}
 .kicker{color:var(--green-deep);font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:.8rem}
-.sec-head{display:flex;justify-content:space-between;gap:26px;align-items:end;flex-wrap:wrap;margin-bottom:24px}
+.sec-head{display:flex;justify-content:space-between;gap:26px;align-items:end;flex-wrap:wrap;margin-bottom:34px}
 .sec-sub{max-width:38ch;color:var(--muted)}
 .drops-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 .drop{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s}
@@ -121,7 +121,7 @@ main,header,footer{position:relative;z-index:1}
 .hint{text-align:center;color:var(--muted);font-size:.88rem;margin:18px 0 0}
 
 /* band parallel */
-.band{margin:70px 0 10px;overflow:hidden;display:grid;gap:10px;transform:rotate(1deg)}
+.band{margin:120px 0 44px;overflow:hidden;display:grid;gap:10px;transform:rotate(1deg)}
 .band-row{display:flex;gap:0;white-space:nowrap;font-weight:800;letter-spacing:-.02em;font-size:clamp(1.6rem,4vw,2.8rem);will-change:transform}
 .band-row span{padding-right:24px}
 .r1{background:var(--beige);border-block:1px solid var(--line);padding:10px 0}
@@ -190,7 +190,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px}
 summary{font-weight:800;cursor:pointer;list-style:none}summary::-webkit-details-marker{display:none}
 details p{color:#4a463f}
-.final{display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;padding:90px 20px 70px;width:min(760px,100%);margin:0 auto}
+.final{display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;padding:140px 20px 110px;width:min(760px,100%);margin:0 auto}
 .final h2{max-width:20ch}
 .final small{display:block;color:var(--muted)}
 footer{border-top:1px solid var(--line);background:#fff}

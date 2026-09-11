@@ -3,12 +3,16 @@ const $=(s,c=document)=>c.querySelector(s), $$=(s,c=document)=>[...c.querySelect
 const peso=n=>'₱'+Math.round(n).toLocaleString('en-PH');
 
 /* ---------- progress + nav + cursor + menu ---------- */
-addEventListener('scroll',()=>{
+function onScroll(){
   const h=document.documentElement, p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
   $('#progress').style.width=p+'%';
   $$('.band-row').forEach(r=>{
-    const sp=parseFloat(r.dataset.speed||8), half=(r.scrollWidth/r.childElementCount)||800;
-    const raw=(h.scrollTop*sp*0.12)%half; // continuous loop, no snapping
+    const sp=parseFloat(r.dataset.speed||8);
+    const half=(r.firstElementChild&&r.firstElementChild.offsetWidth)||800; // exact one-span period
+    const band=r.parentElement;
+    const bandTop=band.getBoundingClientRect().top+h.scrollTop;
+    const anchor=bandTop+band.offsetHeight/2-innerHeight/2; // scroll pos where band sits dead-center
+    const raw=((h.scrollTop-anchor)*sp*0.035)%half; // gentle drift, 0 at center → rows rest in proper place
     const off=-(((raw%half)+half)%half); // pinned to (-half,0] so the strip never gaps
     r.style.transform=`translate3d(${off}px,0,0)`;
   });
@@ -19,7 +23,9 @@ addEventListener('scroll',()=>{
     const off=Math.max(-30,Math.min(30,raw)); // clamped — no runaway drift
     el.style.translate=`0 ${off}px`;
   });
-},{passive:true});
+}
+addEventListener('scroll',onScroll,{passive:true});
+onScroll(); // set proper resting place on load, not just after first scroll
 
 const cur=$('#cursor');
 addEventListener('pointermove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';});

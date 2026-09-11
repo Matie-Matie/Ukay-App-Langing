@@ -16,13 +16,17 @@ function onScroll(){
     const off=-(((raw%half)+half)%half); // pinned to (-half,0] so the strip never gaps
     r.style.transform=`translate3d(${off}px,0,0)`;
   });
-  $$('#how .how, .sell-visual').forEach(el=>{
+  $$('#how .how').forEach(el=>{
     const sp=parseFloat(el.dataset.speed||0); if(!sp) return;
     const rc=el.getBoundingClientRect();
     const raw=(innerHeight/2-(rc.top+rc.height/2))*sp*0.04;
     const off=Math.max(-30,Math.min(30,raw)); // clamped — no runaway drift
     el.style.translate=`0 ${off}px`;
   });
+  const sv=$('.sell-visual'); // frame stays locked — only the photo glides inside it
+  if(sv){const img=sv.querySelector('img'), r=sv.getBoundingClientRect(), excess=img.offsetHeight-r.height;
+    if(excess>0){const off=Math.max(-excess/2,Math.min(excess/2,(innerHeight/2-(r.top+r.height/2))*0.08));
+      img.style.transform=`translate3d(0,${off.toFixed(1)}px,0)`;}}
 }
 addEventListener('scroll',onScroll,{passive:true});
 onScroll(); // set proper resting place on load, not just after first scroll

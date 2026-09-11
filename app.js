@@ -28,6 +28,7 @@ $$('#mobileMenu a').forEach(a=>a.onclick=()=>$('#mobileMenu').classList.remove('
   const cv=$('#webgl'); if(!cv||typeof THREE==='undefined') return;
   const renderer=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:true});
   const scene=new THREE.Scene();
+  scene.fog=new THREE.Fog(0xfbfbf8,9,17); // depth falloff — far orbs melt into the bg
   const cam=new THREE.PerspectiveCamera(55,1,0.1,100); cam.position.z=9;
   const amb=new THREE.AmbientLight(0xffffff,.9); scene.add(amb);
   const key=new THREE.DirectionalLight(0xffffff,.9); key.position.set(4,6,6); scene.add(key);
@@ -36,9 +37,10 @@ $$('#mobileMenu a').forEach(a=>a.onclick=()=>$('#mobileMenu').classList.remove('
   for(let i=0;i<26;i++){
     const s=i%4===0? .9+Math.random()*1.1 : .28+Math.random()*.7;
     const g=new THREE.SphereGeometry(s,28,28);
-    const m=new THREE.MeshStandardMaterial({color:cols[i%cols.length],roughness:.55,metalness:.08,transparent:true,opacity:.85});
+    const z=(Math.random()-.5)*6-1, depth=(z+4)/6; // 0 far → 1 near
+    const m=new THREE.MeshStandardMaterial({color:cols[i%cols.length],roughness:.55,metalness:.08,transparent:true,opacity:.35+.55*depth});
     const mesh=new THREE.Mesh(g,m);
-    mesh.position.set((Math.random()-.5)*16,(Math.random()-.5)*10,(Math.random()-.5)*6-1);
+    mesh.position.set((Math.random()-.5)*16,(Math.random()-.5)*10,z);
     mesh.userData={y:mesh.position.y,sp:.3+Math.random()*.9,ph:Math.random()*Math.PI*2,rx:(Math.random()-.5)*.004};
     scene.add(mesh); orbs.push(mesh);
   }

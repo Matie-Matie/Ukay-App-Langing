@@ -7,12 +7,16 @@ addEventListener('scroll',()=>{
   const h=document.documentElement, p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
   $('#progress').style.width=p+'%';
   $$('.band-row').forEach(r=>{
-    const sp=parseFloat(r.dataset.speed||8), y=(h.scrollTop-sp*20)*sp*0.06;
-    r.style.transform=`translateX(${y%400}px)`;
+    const sp=parseFloat(r.dataset.speed||8), half=(r.scrollWidth/r.childElementCount)||800;
+    const raw=(h.scrollTop*sp*0.12)%half; // continuous loop, no snapping
+    const off=-(((raw%half)+half)%half); // pinned to (-half,0] so the strip never gaps
+    r.style.transform=`translate3d(${off}px,0,0)`;
   });
   $$('#how .how, .sell-visual').forEach(el=>{
     const sp=parseFloat(el.dataset.speed||0); if(!sp) return;
-    const rc=el.getBoundingClientRect(), off=(innerHeight/2-(rc.top+rc.height/2))*sp*0.04;
+    const rc=el.getBoundingClientRect();
+    const raw=(innerHeight/2-(rc.top+rc.height/2))*sp*0.04;
+    const off=Math.max(-30,Math.min(30,raw)); // clamped — no runaway drift
     el.style.translate=`0 ${off}px`;
   });
 },{passive:true});
@@ -69,7 +73,7 @@ $$('#mobileMenu a').forEach(a=>a.onclick=()=>$('#mobileMenu').classList.remove('
   hero.addEventListener('pointermove',e=>{
     const r=hero.getBoundingClientRect(), x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5;
     stage.style.transform=`rotateY(${x*16}deg) rotateX(${-y*12}deg)`;
-    $$('.orbit').forEach(o=>{const d=+o.dataset.depth||20;o.style.translate=`${x*d}px ${y*d}px`});
+    $$('.orbit').forEach(o=>{const d=+o.dataset.depth||20;o.style.setProperty('--px',x*d+'px');o.style.setProperty('--py',y*d+'px')});
   });
   hero.addEventListener('pointerleave',()=>{stage.style.transform='rotateY(0) rotateX(0)'});
 })();
@@ -79,7 +83,7 @@ function fallbackReveal(){$$('.reveal').forEach(el=>{el.style.opacity=1;el.style
 if(typeof gsap!=='undefined'){
   gsap.registerPlugin(ScrollTrigger);
   $$('.reveal').forEach((el,i)=>{
-    gsap.to(el,{opacity:1,y:0,duration:1,ease:'power4.out',delay:(i%4)*.05,
+    gsap.to(el,{opacity:1,y:0,duration:1,ease:'power4.out',delay:(i%4)*.05,clearProps:'transform',
       scrollTrigger:{trigger:el,start:'top 88%'}});
   });
   gsap.to('.hero-copy h1',{yPercent:-8,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
@@ -113,7 +117,7 @@ function toast(html){
   setTimeout(()=>{d.style.opacity='0';d.style.transition='opacity .5s';setTimeout(()=>d.remove(),500)},4200);
 }
 setTimeout(()=>toast('<b>@bea</b> just sold a trench coat for <b>₱1,950</b> 🔥'),2500);
-setTimeout(()=>toast('Friday 8PM live unlocked at <b>5,000</b> waitlist 👀'),9000);
+setTimeout(()=>toast('Friday 8PM live unlocked at <b>5,000</b> waitlist 👀'),16000);
 
 let cart=0, earn=12840;
 function bumpCart(x,y){
@@ -138,7 +142,7 @@ function bidOn(card,btn,x,y){
 $$('[data-bid]').forEach(btn=>btn.addEventListener('click',e=>{
   const card=btn.closest('.drop'); bidOn(card,btn,e.clientX,e.clientY);
 }));
-/* ambient rival bids every 3s */
+/* ambient rival bids — prices tick silently, toast only sometimes */
 setInterval(()=>{
   const cards=$$('.drop'); if(!document.hasFocus()&&Math.random()<.3) return;
   const card=cards[Math.floor(Math.random()*cards.length)];
@@ -146,11 +150,12 @@ setInterval(()=>{
   const inc=[40,60,80,120][Math.floor(Math.random()*4)]; cur+=inc;
   priceEl.textContent=peso(cur);
   const bidsEl=$('.bids',card); bidsEl.textContent=((parseInt(bidsEl.textContent)||0)+1)+' bids';
+  if(Math.random()<.5) return; // most bids pass quietly — notification only once in a while
   const who=names[Math.floor(Math.random()*names.length)];
   toast(`<b>@${who}</b> bid <b>${peso(cur)}</b> · ${card.dataset.name}`);
   const feed=$('#phoneFeed');
-  if(feed&&Math.random()<.5){const s=document.createElement('span');s.innerHTML=`<b>@${who}</b> bid ${peso(cur)}`;feed.prepend(s);while(feed.children.length>3)feed.lastChild.remove()}
-},3400);
+  if(feed){const s=document.createElement('span');s.innerHTML=`<b>@${who}</b> bid ${peso(cur)}`;feed.prepend(s);while(feed.children.length>3)feed.lastChild.remove()}
+},9000);
 /* earnings ticker */
 setInterval(()=>{earn+=Math.floor(120+Math.random()*480);const e=$('#earnNum');if(e)e.textContent=peso(earn)},2800);
 $('#cartBtn').onclick=()=>toast(cart?`You have <b>${cart}</b> active bid${cart>1?'s':''} — checkout unlocks on launch 💚`:'Tap <b>Bid now</b> on any drop to feel it ⚡');

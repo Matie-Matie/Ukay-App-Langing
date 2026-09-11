@@ -45,7 +45,7 @@ $$('#mobileMenu a').forEach(a=>a.onclick=()=>$('#mobileMenu').classList.remove('
     const m=new THREE.MeshStandardMaterial({color:cols[i%cols.length],roughness:.55,metalness:.08,transparent:true,opacity:.35+.55*depth});
     const mesh=new THREE.Mesh(g,m);
     mesh.position.set((Math.random()-.5)*16,(Math.random()-.5)*10,z);
-    mesh.userData={y:mesh.position.y,sp:.3+Math.random()*.9,ph:Math.random()*Math.PI*2,rx:(Math.random()-.5)*.004};
+    mesh.userData={y:mesh.position.y,sp:.08+Math.random()*.22,ph:Math.random()*Math.PI*2,rx:(Math.random()-.5)*.0012};
     scene.add(mesh); orbs.push(mesh);
   }
   // hero ring
@@ -57,8 +57,8 @@ $$('#mobileMenu a').forEach(a=>a.onclick=()=>$('#mobileMenu').classList.remove('
   const t0=performance.now();
   (function loop(t){
     const e=(t-t0)/1000;
-    orbs.forEach(o=>{o.position.y=o.userData.y+Math.sin(e*o.userData.sp+o.userData.ph)*.7;o.rotation.x+=o.userData.rx;o.rotation.y+=.002});
-    ring.rotation.z=e*.12;
+    orbs.forEach(o=>{o.position.y=o.userData.y+Math.sin(e*o.userData.sp+o.userData.ph)*.7;o.rotation.x+=o.userData.rx;o.rotation.y+=.0006});
+    ring.rotation.z=e*.04;
     cam.position.x+=((mx*1.4)-cam.position.x)*.04;
     cam.position.y+=((-my*1.0)-cam.position.y)*.04;
     cam.lookAt(0,0,0);

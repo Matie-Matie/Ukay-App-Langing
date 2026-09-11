@@ -190,8 +190,12 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 
 /* faq + final */
 .faq-list{display:grid;gap:12px;margin-top:18px}
-details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px}
-summary{font-weight:800;cursor:pointer;list-style:none}summary::-webkit-details-marker{display:none}
+details{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px 20px;transition:border-color .4s var(--ease),box-shadow .4s var(--ease),transform .5s var(--ease)}
+details:hover{border-color:#bcd8c6;box-shadow:0 14px 34px -22px rgba(20,122,75,.5)}
+summary{font-weight:800;cursor:pointer;list-style:none;transition:color .3s var(--ease),padding-left .45s var(--ease)}summary::-webkit-details-marker{display:none}
+summary:hover{color:var(--green-deep);padding-left:6px}
+details[open]{border-color:#bcd8c6}
+details[open] p{animation:slidein .45s var(--ease)}
 details p{color:#4a463f}
 .final{display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center;padding:140px 20px 110px;width:min(760px,100%);margin:0 auto}
 .final h2{max-width:20ch}

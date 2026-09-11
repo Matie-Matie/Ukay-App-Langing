@@ -187,6 +187,16 @@ $('#cartBtn').onclick=()=>toast(cart?`You have <b>${cart}</b> active bid${cart>1
   items.addEventListener('input',update); price.addEventListener('input',update); update();
 })();
 
+/* ---------- FAQ : hover reveals, click pins ---------- */
+$$('.faq-list details').forEach(d=>{
+  if(d.open) d.dataset.pin='1'; // keep the initially-open one open
+  d.addEventListener('mouseenter',()=>{d.open=true});
+  d.addEventListener('mouseleave',()=>{if(!d.dataset.pin) d.open=false});
+  d.querySelector('summary').addEventListener('click',()=>{
+    setTimeout(()=>{if(d.open) d.dataset.pin='1'; else delete d.dataset.pin},0);
+  });
+});
+
 /* ---------- magnetic buttons ---------- */
 $$('.magnetic').forEach(b=>{
   b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.12}px,${(e.clientY-r.top-r.height/2)*.18}px)`});

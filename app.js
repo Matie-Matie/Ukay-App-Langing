@@ -67,7 +67,10 @@ $$('#mobileMenu a').forEach(a=>a.onclick=()=>$('#mobileMenu').classList.remove('
   const t0=performance.now();
   (function loop(t){
     const e=(t-t0)/1000;
-    orbs.forEach(o=>{o.position.y=o.userData.y+Math.sin(e*o.userData.sp+o.userData.ph)*.7;o.rotation.x+=o.userData.rx;o.rotation.y+=.0006});
+    orbs.forEach(o=>{const u=o.userData, m=e*u.sp+u.ph;
+      o.position.y=u.y+Math.sin(m)*.7;
+      o.scale.set(1+Math.sin(m*.7)*.14,1+Math.cos(m*.55)*.17,1+Math.sin(m*.62+1)*.12); // slow liquid morph
+      o.rotation.x+=u.rx;o.rotation.y+=.0006});
     ring.rotation.z=e*.04;
     cam.position.x+=((mx*1.4)-cam.position.x)*.04;
     cam.position.y+=((-my*1.0)-cam.position.y)*.04;

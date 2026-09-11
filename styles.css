@@ -50,7 +50,13 @@ main,header,footer{position:relative;z-index:1}
 .dof{position:absolute;inset:0;pointer-events:none}
 .dof-back{z-index:0}
 .dof-front{z-index:2;overflow:hidden}
-.dof .b{position:absolute;border-radius:50%}
+.dof .b{position:absolute;border-radius:50%;animation:morph var(--d,16s) ease-in-out infinite}
+@keyframes morph{
+  0%,100%{border-radius:58% 42% 55% 45%/52% 58% 42% 48%;translate:0 0}
+  33%{border-radius:45% 55% 42% 58%/58% 44% 56% 42%;translate:2% -4%}
+  66%{border-radius:52% 48% 60% 40%/44% 56% 44% 56%;translate:-3% 3%}
+}
+.b1{--d:18s}.b2{--d:14s}.b3{--d:20s}.b4{--d:15s}.f1{--d:13s}.f2{--d:17s}.f3{--d:12s}
 .b1{width:340px;height:340px;left:-110px;top:-90px;background:#e7f0e6;filter:blur(70px);opacity:.8}
 .b2{width:260px;height:260px;left:32%;bottom:-120px;background:#f5e8d2;filter:blur(60px);opacity:.75}
 .b3{width:220px;height:220px;right:24%;top:8%;background:#dde8fb;filter:blur(55px);opacity:.6}
